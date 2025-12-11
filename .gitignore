@@ -2,3 +2,7 @@
 *.config
 *bin
 *obj
+*Properties
+*appsettings.Development.json
+*appsettings.json
+*MiniPermit.sln

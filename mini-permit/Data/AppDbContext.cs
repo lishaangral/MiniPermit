@@ -9,5 +9,6 @@ namespace MiniPermit.Data
             : base(options) { }
 
         public DbSet<Permit> Permits => Set<Permit>();
+        public DbSet<Employee> Employees => Set<Employee>();
     }
 }

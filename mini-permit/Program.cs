@@ -5,7 +5,14 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Controllers
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
+
+// Add MySQL connection
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+    ));
 
 // Add Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -18,13 +25,6 @@ builder.Services.AddSwaggerGen(c =>
         Description = "A simple ASP.NET Core 9 + MySQL + Swagger demo"
     });
 });
-
-// Add MySQL connection
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
-    ));
 
 // Enable global CORS for Swagger testing
 builder.Services.AddCors(options =>
